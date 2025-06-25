@@ -32,6 +32,33 @@ Sistema de gestão completo para clínicas de tricologia, incluindo gestão de p
 ✅ **Sistema de Notificações** - Lembretes e alertas automáticos  
 ✅ **Multi-usuário** - Diferentes níveis de acesso (admin, médico, recepção)  
 
+## 🎯 Status do Desenvolvimento
+
+### ✅ Concluído
+- [x] Estrutura base do monorepo (Turborepo)
+- [x] Configuração Next.js 14 + TypeScript
+- [x] Schema completo do banco Supabase
+- [x] 9 migrações especializadas em tricologia
+- [x] Configurações de ambiente
+- [x] Repositório GitHub configurado
+
+### 🚧 Em Desenvolvimento
+- [ ] Packages compartilhados (supabase, ui, email)
+- [ ] Sistema de autenticação
+- [ ] Dashboard principal
+- [ ] CRUD de pacientes
+- [ ] Sistema de análise capilar
+- [ ] Upload de fotos
+- [ ] Agenda de consultas
+
+### 📋 Próximas Etapas
+- [ ] Gestão de tratamentos
+- [ ] Sistema financeiro
+- [ ] Relatórios e analytics
+- [ ] Website institucional
+- [ ] Testes automatizados
+- [ ] Deploy e CI/CD
+
 ## Tecnologias
 
 [Next.js](https://nextjs.org/) - Framework  
@@ -68,15 +95,33 @@ Sistema de gestão completo para clínicas de tricologia, incluindo gestão de p
 └── ...
 ```
 
+## Database Schema (Especializado em Tricologia)
+
+### Tabelas Principais
+- **users** - Usuários do sistema (admin, doctor, receptionist)
+- **patients** - Pacientes com dados médicos completos
+- **consultations** - Consultas médicas
+- **hair_analysis** - Análises capilares detalhadas
+- **hair_photos** - Fotos capilares com metadata
+- **treatments** - Tratamentos prescritos
+- **treatment_sessions** - Sessões de tratamento
+- **products** - Produtos dermocosméticos
+- **prescriptions** - Prescrições médicas
+- **payments** - Controle financeiro
+
+### Características Específicas
+- **Escalas de Avaliação**: Ludwig, Norwood-Hamilton, SALT
+- **Tipos Capilares**: Straight, Wavy, Curly, Coily
+- **Condições do Couro Cabeludo**: Normal, Dry, Oily, Sensitive, Irritated
+- **Análises Detalhadas**: Densidade, espessura, sensibilidade, oleosidade
+- **Protocolos Tricológicos**: Pull test, tricoscopia, microscopia
+
 ## Pré-requisitos
 
-- Bun
+- Bun >= 1.1.26
 - Docker
-- Supabase
-- Upstash
-- Resend
-- Sentry
-- OpenPanel
+- Supabase CLI
+- Node.js >= 18
 
 ## Começando
 
@@ -101,7 +146,7 @@ cp apps/app/.env.example apps/app/.env
 cp apps/web/.env.example apps/web/.env
 ```
 
-4. Inicie o banco de dados:
+4. Inicie o Supabase:
 
 ```bash
 bun dev:api
@@ -133,16 +178,12 @@ bun build        # Build para produção
 bun test         # Executa testes
 ```
 
-## Especialidades da Tricologia
+## Usuários Demo
 
-O sistema foi desenvolvido especificamente para clínicas de tricologia, incluindo:
+Após rodar o seed:
 
-- **Análise Capilar Completa**: Tipo de cabelo, densidade, espessura, condições do couro cabeludo
-- **Diagnósticos Especializados**: Alopecia androgenética, areata, difusa, cicatricial, etc.
-- **Tratamentos Específicos**: Medicamentosos, procedimentais, cosméticos
-- **Escalas de Avaliação**: Ludwig, Norwood-Hamilton, SALT, etc.
-- **Protocolos de Acompanhamento**: Fotografias padronizadas, medições, progressos
-- **Produtos Capilares**: Controle de estoque de dermocosméticos
+- **Admin**: admin@cureclinica.com.br / admin123
+- **Médico**: dr.silva@cureclinica.com.br / doctor123
 
 ## Contribuição
 
