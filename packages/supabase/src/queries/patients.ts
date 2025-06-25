@@ -5,19 +5,36 @@ export async function getPatients({
   search,
   limit = 50,
   offset = 0,
+  status,
+  gender,
 }: {
   search?: string
   limit?: number
   offset?: number
+  status?: boolean
+  gender?: string
 } = {}) {
   const supabase = createClient()
   
   let query = supabase
     .from('patients')
-    .select('*')
-    .eq('is_active', true)
+    .select('*', { count: 'exact' })
     .order('created_at', { ascending: false })
 
+  // Apply status filter
+  if (status !== undefined) {
+    query = query.eq('is_active', status)
+  } else {
+    // Default to active patients only
+    query = query.eq('is_active', true)
+  }
+
+  // Apply gender filter
+  if (gender) {
+    query = query.eq('gender', gender)
+  }
+
+  // Apply search filter
   if (search) {
     query = query.or(
       `first_name.ilike.%${search}%,last_name.ilike.%${search}%,email.ilike.%${search}%,phone.ilike.%${search}%`
@@ -63,9 +80,9 @@ export async function getPatientWithConsultations(id: string) {
       *,
       consultations (
         id,
-        scheduled_at,
+        scheduled_date,
         status,
-        reason,
+        chief_complaint,
         diagnosis,
         doctor:doctor_id (
           full_name,
@@ -95,8 +112,8 @@ export async function getPatientHairAnalyses(patientId: string) {
         role
       ),
       consultation:consultation_id (
-        scheduled_at,
-        reason
+        scheduled_date,
+        chief_complaint
       )
     `)
     .eq('patient_id', patientId)
