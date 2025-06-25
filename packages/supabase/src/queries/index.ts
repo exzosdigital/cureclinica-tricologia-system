@@ -1,0 +1,5 @@
+export * from './patients'
+export * from './consultations'
+export * from './hair-analysis'
+export * from './users'
+export * from './auth'
