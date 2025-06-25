@@ -18,8 +18,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2022",
-    "verbatimModuleSyntax": true
+    "target": "es2022"
   },
   "exclude": ["node_modules"]
 }
