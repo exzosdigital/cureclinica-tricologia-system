@@ -19,6 +19,10 @@
 
 Sistema de gestão completo para clínicas de tricologia, incluindo gestão de pacientes, análises capilares, tratamentos, agenda e muito mais.
 
+## 🚨 Status do Deploy
+
+**Pull Request #1 aberto**: [Correção dos erros de deploy na Vercel](https://github.com/exzosdigital/cureclinica-tricologia-system/pull/1)
+
 ## Funcionalidades
 
 ✅ **Gestão de Pacientes** - Cadastro completo com histórico médico  
@@ -37,27 +41,32 @@ Sistema de gestão completo para clínicas de tricologia, incluindo gestão de p
 ### ✅ Concluído
 - [x] Estrutura base do monorepo (Turborepo)
 - [x] Configuração Next.js 14 + TypeScript
-- [x] Schema completo do banco Supabase
-- [x] 9 migrações especializadas em tricologia
-- [x] Configurações de ambiente
-- [x] Repositório GitHub configurado
+- [x] Schema completo do banco Supabase (10 tabelas)
+- [x] Sistema de Autenticação com Supabase Auth
+- [x] Layout principal com sidebar responsiva
+- [x] Dashboard com estatísticas e widgets
+- [x] CRUD de Pacientes (listagem com filtros)
+- [x] Packages compartilhados:
+  - [x] @cureclinica/supabase (queries, mutations, types)
+  - [x] @cureclinica/ui (componentes shadcn/ui)
+  - [x] @cureclinica/analytics (provider básico)
+  - [x] @cureclinica/typescript (configurações)
 
 ### 🚧 Em Desenvolvimento
-- [ ] Packages compartilhados (supabase, ui, email)
-- [ ] Sistema de autenticação
-- [ ] Dashboard principal
-- [ ] CRUD de pacientes
+- [ ] Formulário de cadastro de pacientes
+- [ ] Página de detalhes do paciente
 - [ ] Sistema de análise capilar
-- [ ] Upload de fotos
+- [ ] Upload de fotos capilares
 - [ ] Agenda de consultas
 
 ### 📋 Próximas Etapas
+- [ ] Deploy na Vercel (aguardando merge do PR #1)
 - [ ] Gestão de tratamentos
 - [ ] Sistema financeiro
 - [ ] Relatórios e analytics
-- [ ] Website institucional
+- [ ] Website institucional (apps/web)
 - [ ] Testes automatizados
-- [ ] Deploy e CI/CD
+- [ ] CI/CD completo
 
 ## Tecnologias
 
@@ -83,19 +92,24 @@ Sistema de gestão completo para clínicas de tricologia, incluindo gestão de p
 ├── apps/
 │   ├── api/                    # Supabase (Database, Auth, Functions)
 │   ├── app/                    # Sistema principal da clínica
-│   └── web/                    # Site institucional
+│   └── web/                    # Site institucional (não iniciado)
 ├── packages/
-│   ├── supabase/              # Queries e mutations
-│   ├── ui/                    # Componentes compartilhados
+│   ├── supabase/              # Queries e mutations ✅
+│   ├── ui/                    # Componentes compartilhados ✅
 │   ├── email/                 # Templates de email
-│   ├── analytics/             # Analytics
+│   ├── analytics/             # Analytics ✅
 │   └── jobs/                  # Background jobs
 ├── tooling/
-│   └── typescript/            # Configurações TypeScript
+│   └── typescript/            # Configurações TypeScript ✅
 └── ...
 ```
 
 ## Database Schema (Especializado em Tricologia)
+
+### Banco de Dados em Produção
+- **Projeto Supabase**: `gvuaslecbrhieyonnufz`
+- **URL**: `https://gvuaslecbrhieyonnufz.supabase.co`
+- **Região**: `us-east-1`
 
 ### Tabelas Principais
 - **users** - Usuários do sistema (admin, doctor, receptionist)
@@ -119,9 +133,9 @@ Sistema de gestão completo para clínicas de tricologia, incluindo gestão de p
 ## Pré-requisitos
 
 - Bun >= 1.1.26
-- Docker
-- Supabase CLI
 - Node.js >= 18
+- Conta na Vercel (para deploy)
+- Conta no Supabase (já configurado)
 
 ## Começando
 
@@ -141,25 +155,10 @@ bun install
 3. Configure as variáveis de ambiente:
 
 ```bash
-cp apps/api/.env.example apps/api/.env
 cp apps/app/.env.example apps/app/.env
-cp apps/web/.env.example apps/web/.env
 ```
 
-4. Inicie o Supabase:
-
-```bash
-bun dev:api
-```
-
-5. Execute as migrações:
-
-```bash
-bun migrate
-bun seed
-```
-
-6. Inicie o desenvolvimento:
+4. Inicie o desenvolvimento:
 
 ```bash
 bun dev
@@ -170,20 +169,25 @@ bun dev
 ```bash
 bun dev          # Inicia tudo em modo desenvolvimento
 bun dev:app      # Inicia apenas o sistema principal
-bun dev:web      # Inicia apenas o site institucional
-bun dev:api      # Inicia apenas o Supabase
-bun migrate      # Executa migrações do banco
-bun seed         # Executa seed do banco
 bun build        # Build para produção
-bun test         # Executa testes
+bun clean        # Limpa caches e node_modules
+bun lint         # Verifica código
+bun typecheck    # Verifica tipos TypeScript
 ```
 
 ## Usuários Demo
 
-Após rodar o seed:
-
 - **Admin**: admin@cureclinica.com.br / admin123
 - **Médico**: dr.silva@cureclinica.com.br / doctor123
+
+## Deploy
+
+1. Faça merge do PR #1
+2. Configure o projeto na Vercel
+3. Adicione as variáveis de ambiente
+4. Deploy automático após push na main
+
+Veja [DEPLOY_VERCEL.md](DEPLOY_VERCEL.md) para instruções detalhadas.
 
 ## Contribuição
 
