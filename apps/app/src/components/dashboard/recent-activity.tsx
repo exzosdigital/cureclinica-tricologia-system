@@ -1,54 +1,65 @@
 import { Card } from '@cureclinica/ui/card'
 import { Badge } from '@cureclinica/ui/badge'
 import { 
-  Activity, 
-  Clock, 
-  User,
+  Activity,
+  Users,
+  Calendar,
   FileText,
-  Calendar
+  TrendingUp,
+  Clock
 } from 'lucide-react'
 
-// Placeholder for recent activity - in production, this would fetch real data
-const recentActivities = [
-  {
-    id: '1',
-    type: 'consultation',
-    description: 'Consulta realizada',
-    user: 'Dr. Silva',
-    time: '10 minutos atrás',
-    icon: Calendar,
-    color: 'text-blue-600',
-  },
-  {
-    id: '2',
-    type: 'patient',
-    description: 'Novo paciente cadastrado',
-    user: 'Recepção',
-    time: '30 minutos atrás',
-    icon: User,
-    color: 'text-green-600',
-  },
-  {
-    id: '3',
-    type: 'analysis',
-    description: 'Análise capilar criada',
-    user: 'Dr. Silva',
-    time: '1 hora atrás',
-    icon: FileText,
-    color: 'text-purple-600',
-  },
-  {
-    id: '4',
-    type: 'treatment',
-    description: 'Tratamento iniciado',
-    user: 'Dr. Silva',
-    time: '2 horas atrás',
-    icon: Activity,
-    color: 'text-orange-600',
-  },
-]
+interface ActivityItem {
+  id: string
+  type: 'patient' | 'consultation' | 'analysis' | 'payment'
+  title: string
+  description: string
+  time: string
+  icon: any
+  color: string
+}
 
 export async function RecentActivity() {
+  // Mock data - in a real app, this would come from a query
+  const activities: ActivityItem[] = [
+    {
+      id: '1',
+      type: 'patient',
+      title: 'Novo paciente cadastrado',
+      description: 'Maria Silva foi cadastrada no sistema',
+      time: 'Há 2 horas',
+      icon: Users,
+      color: 'text-blue-600 bg-blue-100'
+    },
+    {
+      id: '2',
+      type: 'consultation',
+      title: 'Consulta realizada',
+      description: 'Consulta com João Santos concluída',
+      time: 'Há 3 horas',
+      icon: Calendar,
+      color: 'text-green-600 bg-green-100'
+    },
+    {
+      id: '3',
+      type: 'analysis',
+      title: 'Análise capilar',
+      description: 'Nova análise para Ana Costa',
+      time: 'Há 5 horas',
+      icon: FileText,
+      color: 'text-purple-600 bg-purple-100'
+    },
+    {
+      id: '4',
+      type: 'payment',
+      title: 'Pagamento recebido',
+      description: 'R$ 350,00 - Consulta + Tratamento',
+      time: 'Há 6 horas',
+      icon: TrendingUp,
+      color: 'text-green-600 bg-green-100'
+    }
+  ]
+
   return (
     <Card className="p-6">
       <div className="flex items-center justify-between mb-4">
@@ -59,29 +70,25 @@ export async function RecentActivity() {
       </div>
 
       <div className="space-y-4">
-        {recentActivities.map((activity) => {
+        {activities.map((activity) => {
           const Icon = activity.icon
           return (
-            <div 
-              key={activity.id}
-              className="flex items-start space-x-3"
-            >
-              <div className={`p-2 rounded-lg bg-gray-50 ${activity.color}`}>
+            <div key={activity.id} className="flex items-start space-x-3">
+              <div className={`p-2 rounded-lg ${activity.color}`}>
                 <Icon className="h-4 w-4" />
               </div>
               
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-gray-900">
+                  {activity.title}
+                </p>
+                <p className="text-sm text-gray-500">
                   {activity.description}
                 </p>
-                <p className="text-xs text-gray-500">
-                  {activity.user}
-                </p>
-              </div>
-              
-              <div className="flex items-center text-xs text-gray-500">
-                <Clock className="h-3 w-3 mr-1" />
-                {activity.time}
+                <div className="mt-1 flex items-center text-xs text-gray-400">
+                  <Clock className="h-3 w-3 mr-1" />
+                  {activity.time}
+                </div>
               </div>
             </div>
           )
