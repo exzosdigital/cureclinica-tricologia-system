@@ -10,7 +10,6 @@ import { CalendarIcon, Loader2 } from 'lucide-react'
 import { Button } from '@cureclinica/ui/button'
 import { Input } from '@cureclinica/ui/input'
 import { Label } from '@cureclinica/ui/label'
-import { Select } from '@cureclinica/ui/select'
 import { Checkbox } from '@cureclinica/ui/checkbox'
 import { Textarea } from '@cureclinica/ui/textarea'
 import { Calendar } from '@cureclinica/ui/calendar'
@@ -183,12 +182,15 @@ export function PatientForm() {
 
           <div>
             <Label htmlFor="gender">Gênero</Label>
-            <Select {...register('gender')}>
+            <select 
+              {...register('gender')}
+              className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
               <option value="">Selecione</option>
               <option value="male">Masculino</option>
               <option value="female">Feminino</option>
               <option value="other">Outro</option>
-            </Select>
+            </select>
           </div>
         </div>
       </div>
@@ -302,25 +304,31 @@ export function PatientForm() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label htmlFor="hair_type">Tipo de Cabelo</Label>
-            <Select {...register('hair_type')}>
+            <select 
+              {...register('hair_type')}
+              className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
               <option value="">Selecione</option>
               <option value="straight">Liso</option>
               <option value="wavy">Ondulado</option>
               <option value="curly">Cacheado</option>
               <option value="coily">Crespo</option>
-            </Select>
+            </select>
           </div>
 
           <div>
             <Label htmlFor="scalp_condition">Condição do Couro Cabeludo</Label>
-            <Select {...register('scalp_condition')}>
+            <select 
+              {...register('scalp_condition')}
+              className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            >
               <option value="">Selecione</option>
               <option value="normal">Normal</option>
               <option value="dry">Seco</option>
               <option value="oily">Oleoso</option>
               <option value="sensitive">Sensível</option>
               <option value="irritated">Irritado</option>
-            </Select>
+            </select>
           </div>
 
           <div>
