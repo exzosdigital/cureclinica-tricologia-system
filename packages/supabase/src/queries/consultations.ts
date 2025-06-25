@@ -35,7 +35,7 @@ export async function getConsultations({
         role
       )
     `)
-    .order('scheduled_at', { ascending: false })
+    .order('scheduled_date', { ascending: false })
 
   if (doctorId) {
     query = query.eq('doctor_id', doctorId)
@@ -56,8 +56,8 @@ export async function getConsultations({
     endOfDay.setHours(23, 59, 59, 999)
     
     query = query
-      .gte('scheduled_at', startOfDay.toISOString())
-      .lte('scheduled_at', endOfDay.toISOString())
+      .gte('scheduled_date', startOfDay.toISOString())
+      .lte('scheduled_date', endOfDay.toISOString())
   }
 
   const { data, error } = await query
@@ -119,9 +119,9 @@ export async function getTodayConsultations(doctorId?: string) {
         phone
       )
     `)
-    .gte('scheduled_at', today.toISOString())
-    .lt('scheduled_at', tomorrow.toISOString())
-    .order('scheduled_at', { ascending: true })
+    .gte('scheduled_date', today.toISOString())
+    .lt('scheduled_date', tomorrow.toISOString())
+    .order('scheduled_date', { ascending: true })
 
   if (doctorId) {
     query = query.eq('doctor_id', doctorId)
@@ -136,7 +136,7 @@ export async function getTodayConsultations(doctorId?: string) {
   return data || []
 }
 
-export async function getUpcomingConsultations({
+export async function getUpcomingAppointments({
   doctorId,
   days = 7,
   limit = 10,
@@ -161,10 +161,10 @@ export async function getUpcomingConsultations({
         phone
       )
     `)
-    .gte('scheduled_at', now.toISOString())
-    .lte('scheduled_at', futureDate.toISOString())
+    .gte('scheduled_date', now.toISOString())
+    .lte('scheduled_date', futureDate.toISOString())
     .in('status', ['scheduled', 'confirmed'])
-    .order('scheduled_at', { ascending: true })
+    .order('scheduled_date', { ascending: true })
     .limit(limit)
 
   if (doctorId) {

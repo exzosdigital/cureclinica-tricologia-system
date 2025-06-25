@@ -103,7 +103,7 @@ export async function rescheduleConsultation(
   const { data, error } = await supabase
     .from('consultations')
     .update({
-      scheduled_at: newDateTime,
+      scheduled_date: newDateTime,
       status: 'scheduled',
     })
     .eq('id', id)
