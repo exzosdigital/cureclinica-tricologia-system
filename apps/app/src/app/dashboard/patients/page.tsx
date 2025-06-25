@@ -7,12 +7,10 @@ import { Plus, Users } from 'lucide-react'
 import Link from 'next/link'
 
 interface PatientsPageProps {
-  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+  searchParams: { [key: string]: string | string[] | undefined }
 }
 
-export default async function PatientsPage({ searchParams: searchParamsPromise }: PatientsPageProps) {
-  const searchParams = await searchParamsPromise
-  
+export default function PatientsPage({ searchParams }: PatientsPageProps) {
   const search = searchParams.search as string
   const page = Number(searchParams.page) || 1
   const status = searchParams.status as string

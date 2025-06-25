@@ -1,4 +1,4 @@
-import { Metadata } from 'next'
+import type { Metadata } from 'next'
 import { PatientForm } from '@/components/patients/patient-form'
 import { Card } from '@cureclinica/ui/card'
 import { Button } from '@cureclinica/ui/button'
