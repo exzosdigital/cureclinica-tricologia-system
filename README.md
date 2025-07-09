@@ -17,7 +17,7 @@
   </p>
 </p>
 
-Sistema de gestão completo para clínicas de tricologia, incluindo gestão de pacientes, análises capilares, tratamentos, agenda e muito mais. Desenvolvido com tecnologias modernas como Next.js 14, TypeScript, Tailwind CSS e Supabase.
+Sistema de gestão completo para clínicas de tricologia, incluindo gestão de pacientes, análises capilares, tratamentos, agenda e muito mais.
 
 ## 🚨 Status do Deploy
 
@@ -207,18 +207,3 @@ Para suporte, entre em contato:
 ---
 
 **Desenvolvido com ❤️ para clínicas de tricologia**
-
----
-
-## Padrões de Código e Desenvolvimento
-
-Este projeto segue rigorosamente as convenções e padrões definidos no boilerplate midday-ai/v1 e nas cursor rules para garantir código de alta qualidade:
-
-### Padrões Principais
-- **TypeScript**: Tipagem estrita, interfaces em vez de types, sem uso de enums
-- **Componentes**: React Server Components quando possível, minimizando `use client`
-- **Estado**: `nuqs` para gerenciamento de estado via URL search parameters
-- **Validação**: Zod para validação de formulários e entradas
-- **Error Handling**: Tratamento robusto de erros com retorno early
-- **Estilo**: Tailwind CSS com shadcn/ui para componentes consistentes
-- **Código**: Funcional e declarativo, evitando classes e duplicação
