@@ -1,5 +1,5 @@
 {
-  "buildCommand": "bun install && bun run build --filter=@cureclinica/app",
+  "buildCommand": "bun run build",
   "outputDirectory": ".next",
   "installCommand": "bun install",
   "framework": "nextjs"
