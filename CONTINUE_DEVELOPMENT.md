@@ -1,8 +1,86 @@
-# Prompt para Continuar o Desenvolvimento
+# Plano de Desenvolvimento - CureClinica Tricologia System
 
 ## Status Atual do Projeto
 
-Estamos desenvolvendo o **CureClinica - Sistema de Gestão de Tricologia** baseado no v1 starter kit (midday-ai/v1). 
+Estamos desenvolvendo o **CureClinica - Sistema de Gestão de Tricologia** baseado no v1 starter kit (midday-ai/v1).
+
+**Última atualização**: 26 de junho de 2025
+
+**Pull Request aberto**: [#1 Correção dos erros de deploy na Vercel](https://github.com/exzosdigital/cureclinica-tricologia-system/pull/1) - Pronto para merge
+
+## Análise de Aderência ao Boilerplate
+
+### Pontos de Conformidade
+✅ **Estrutura base do monorepo**: Segue o padrão Turborepo com organização correta de apps/packages
+✅ **Stack de tecnologia**: Next.js 14, TypeScript, Tailwind, shadcn/ui, Supabase
+✅ **Padrões de código**: TypeScript corretamente tipado, componentes funcionais, bons padrões de nomenclatura
+
+### Oportunidades de Melhoria
+🔄 **Internacionalização (i18n)**: Implementar o sistema de localização com [locale] conforme o boilerplate
+🔄 **Server Actions**: Adicionar diretório `/actions` com validação via react-safe-action
+🔄 **Email Templates**: Implementar os templates React Email mencionados no boilerplate
+🔄 **Suspense**: Melhorar a experiência de carregamento com Suspense e fallbacks
+
+## Roadmap de Desenvolvimento
+
+### 1. Completar CRUD de Pacientes
+
+#### a) Formulário de cadastro com validação Zod
+- [ ] Definir esquema Zod para validação de todos os campos do paciente
+- [ ] Implementar React Hook Form para gestão de estado do formulário
+- [ ] Criar componentes de feedback visual para erros de validação
+- [ ] Implementar lógica de persistência de dados via Server Action
+- [ ] Adicionar upload de foto do paciente com pré-visualização
+
+#### b) Página de detalhes do paciente
+- [ ] Criar sistema de tabs para diferentes seções (Informações Pessoais, Histórico Médico, Análises, Tratamentos)
+- [ ] Implementar como Server Component para melhor performance
+- [ ] Desenvolver timeline de histórico médico completo
+- [ ] Adicionar visualização de fotos capilares com comparação antes/depois
+- [ ] Implementar sistema de notas e observações médicas
+
+### 2. Aprimorar Aderência ao Boilerplate midday-ai/v1
+
+#### a) Implementar internacionalização (i18n)
+- [ ] Adicionar estrutura `[locale]` nas rotas conforme o boilerplate original
+- [ ] Configurar suporte para português e inglês
+- [ ] Extrair todos os textos estáticos para arquivos de tradução
+- [ ] Implementar troca de idioma no header
+- [ ] Detectar idioma do navegador automaticamente
+
+#### b) Adicionar diretório `/actions` para Server Actions
+- [ ] Criar diretório `/actions` conforme estrutura do boilerplate
+- [ ] Implementar validação de ações com react-safe-action
+- [ ] Separar lógica de UI da lógica de servidor
+- [ ] Implementar tratamento de erros consistente
+- [ ] Migrar endpoints existentes para o novo padrão
+
+#### c) Implementar React Email
+- [ ] Criar templates para notificações de consulta
+- [ ] Configurar integração com Resend para envio
+- [ ] Implementar pré-visualização de emails no ambiente de desenvolvimento
+- [ ] Criar workflow para lembrete de consultas
+- [ ] Testar visualização em diferentes clientes de email
+
+### 3. Oportunidades de Melhoria
+
+#### a) Melhorias Técnicas
+
+##### Otimização de Server Components
+- [ ] Analisar e reduzir o uso de `use client` nos componentes atuais
+- [ ] Separar partes interativas em pequenos componentes client
+- [ ] Manter o máximo possível de código como server components
+- [ ] Implementar streaming de dados com Suspense e React.lazy
+
+##### Estado via URL com nuqs
+- [ ] Substituir implementação atual de paginação por nuqs
+- [ ] Refatorar sistema de filtragem para usar URL parameters
+- [ ] Implementar persistência de filtros entre navegações
+
+##### Suspense e Fallbacks
+- [ ] Criar componentes de Skeleton para todas as áreas principais
+- [ ] Envolver componentes pesados em Suspense
+- [ ] Implementar carregamento gradual da interface
 
 ### ✅ O que já foi criado:
 
@@ -89,10 +167,22 @@ Estamos desenvolvendo o **CureClinica - Sistema de Gestão de Tricologia** basea
 
 1. **Completar CRUD de Pacientes** 🔄
    - [x] Lista de pacientes com filtros ✅
-   - [ ] Formulário de cadastro de paciente
+   - [ ] Formulário de cadastro de paciente com validação Zod
    - [ ] Página de detalhes do paciente
    - [ ] Edição de dados do paciente
    - [ ] Histórico médico do paciente
+
+2. **Aprimorar Aderência ao Boilerplate midday-ai/v1** 🚀
+   - [ ] Implementar estrutura [locale] para internacionalização
+   - [ ] Adicionar diretório /actions para Server Actions validadas
+   - [ ] Implementar templates React Email para notificações
+   - [ ] Otimizar performance com Suspense e fallbacks
+
+3. **Aplicar Melhores Práticas de Cursor Rules** 🔽
+   - [ ] Aumentar uso de Server Components e reduzir código client-side
+   - [ ] Implementar nuqs para gerenciamento de estado via URL
+   - [ ] Aprimorar tratamento de erros e validação
+   - [ ] Otimizar Web Vitals (LCP, CLS, FID)
 
 2. **Deploy na Vercel** 📋
    - [ ] Configurar projeto na Vercel
