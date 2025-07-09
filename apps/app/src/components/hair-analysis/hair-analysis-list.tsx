@@ -1,19 +1,43 @@
 import type { HairAnalysis } from '@cureclinica/supabase/types'
 import { Card } from '@cureclinica/ui/card'
 import { Badge } from '@cureclinica/ui/badge'
+import { Button } from '@cureclinica/ui/button'
 import { 
   Microscope, 
   Calendar, 
   User,
-  FileText
+  FileText,
+  Eye,
+  Edit,
+  MoreHorizontal
 } from 'lucide-react'
 import { formatDate } from '@cureclinica/ui/cn'
+import { getHairAnalyses } from '@cureclinica/supabase/queries'
+import Link from 'next/link'
 
 interface HairAnalysisListProps {
-  analyses: any[] // Using any for now since HairAnalysis type is complex
+  search?: string
+  page?: number
+  patientId?: string
+  analysisType?: string
 }
 
-export function HairAnalysisList({ analyses }: HairAnalysisListProps) {
+export async function HairAnalysisList({ 
+  search, 
+  page = 1, 
+  patientId,
+  analysisType 
+}: HairAnalysisListProps) {
+  const limit = 20
+  const offset = (page - 1) * limit
+
+  const { data: analyses, count } = await getHairAnalyses({
+    search,
+    limit,
+    offset,
+    patientId,
+    analysisType
+  })
   if (analyses.length === 0) {
     return (
       <Card className="p-6">
