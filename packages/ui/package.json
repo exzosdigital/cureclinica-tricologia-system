@@ -38,6 +38,7 @@
   "exports": {
     "./globals.css": "./src/globals.css",
     "./button": "./src/components/button.tsx",
+    "./buttonVariants": "./src/components/button.tsx",
     "./input": "./src/components/input.tsx",
     "./label": "./src/components/label.tsx",
     "./card": "./src/components/card.tsx",
