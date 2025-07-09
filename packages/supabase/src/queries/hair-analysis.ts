@@ -2,13 +2,21 @@ import { createClient } from '../clients/server'
 import type { HairAnalysis } from '../types'
 
 export async function getHairAnalyses({
+  search,
   patientId,
   performedBy,
+  analysisType,
+  severity,
+  ludwig,
   limit = 50,
   offset = 0,
 }: {
+  search?: string
   patientId?: string
   performedBy?: string
+  analysisType?: string
+  severity?: string
+  ludwig?: string
   limit?: number
   offset?: number
 } = {}) {
@@ -21,18 +29,25 @@ export async function getHairAnalyses({
       patient:patient_id (
         first_name,
         last_name,
-        phone
+        phone,
+        email
       ),
       performed_by_user:performed_by (
         full_name,
         role
       ),
       consultation:consultation_id (
-        scheduled_at,
-        reason
+        scheduled_date,
+        chief_complaint
       )
-    `)
+    `, { count: 'exact' })
     .order('created_at', { ascending: false })
+
+  if (search) {
+    query = query.or(
+      `diagnosis.ilike.%${search}%,patient.first_name.ilike.%${search}%,patient.last_name.ilike.%${search}%`
+    )
+  }
 
   if (patientId) {
     query = query.eq('patient_id', patientId)
@@ -42,7 +57,19 @@ export async function getHairAnalyses({
     query = query.eq('performed_by', performedBy)
   }
 
-  const { data, error } = await query
+  if (analysisType) {
+    query = query.eq('analysis_type', analysisType)
+  }
+
+  if (severity) {
+    query = query.eq('severity', severity)
+  }
+
+  if (ludwig) {
+    query = query.eq('ludwig_scale', parseInt(ludwig))
+  }
+
+  const { data, error, count } = await query
     .range(offset, offset + limit - 1)
     .limit(limit)
 
@@ -50,7 +77,10 @@ export async function getHairAnalyses({
     throw new Error(`Failed to fetch hair analyses: ${error.message}`)
   }
 
-  return data || []
+  return {
+    data: data || [],
+    count: count || 0,
+  }
 }
 
 export async function getHairAnalysisById(id: string) {

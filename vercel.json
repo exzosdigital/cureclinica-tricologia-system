@@ -1,0 +1,19 @@
+{
+  "buildCommand": "cd apps/app && npm run build",
+  "outputDirectory": "apps/app/.next",
+  "framework": "nextjs",
+  "installCommand": "bun install",
+  "devCommand": "cd apps/app && npm run dev",
+  "ignoreCommand": "git diff --quiet HEAD^ HEAD ./apps/app",
+  "functions": {
+    "apps/app/src/app/api/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/apps/app/$1"
+    }
+  ]
+}
