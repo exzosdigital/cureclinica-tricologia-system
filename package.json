@@ -19,11 +19,7 @@
     "lint": "turbo lint && bun lint:repo",
     "lint:repo": "bunx sherif@latest",
     "lint:repo:fix": "bunx sherif@latest --fix",
-    "typecheck": "turbo typecheck",
-    "dev:admin": "turbo run dev --filter=@cureclinica/admin",
-    "build:admin": "turbo run build --filter=@cureclinica/admin",
-    "start:admin": "cd apps/admin && npm run start",
-    "lint:admin": "turbo run lint --filter=@cureclinica/admin"
+    "typecheck": "turbo typecheck"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
