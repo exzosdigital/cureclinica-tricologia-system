@@ -46,7 +46,17 @@ export function createServiceClient() {
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
     {
-      cookies: {},
+      cookies: {
+        get(name: string) {
+          return undefined
+        },
+        set(name: string, value: string, options: any) {
+          // Service client doesn't need to set cookies
+        },
+        remove(name: string, options: any) {
+          // Service client doesn't need to remove cookies
+        },
+      },
     }
   )
 }
